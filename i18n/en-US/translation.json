@@ -1,0 +1,15 @@
+{
+  "common": {
+    "language": "Language",
+    "signin": "Sign In",
+    "signup": "Sign Up",
+    "register": "Register",
+    "login": "Login",
+    "email": "Email",
+    "password": "Password",
+    "alreadyHaveAccount": "Already have an account?"
+  },
+  "error": {
+    "required": "This field is required"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "common": {
+    "language": "اللغة",
+    "signin": "تسجيل الدخول",
+    "signup": "إنشاء حساب",
+    "register": "تسجيل",
+    "login": "تسجيل الدخول",
+    "email": "البريد الإلكتروني",
+    "password": "كلمة المرور",
+    "alreadyHaveAccount": "هل لديك حساب بالفعل؟"
+  },
+  "error": {
+    "required": "هذا الحقل مطلوب"
+  }
+}
