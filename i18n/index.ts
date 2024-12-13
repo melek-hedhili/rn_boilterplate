@@ -50,10 +50,17 @@ const initI18n = async () => {
 initI18n();
 type LanguageType = keyof typeof resources;
 const changeLanguage = async (language: LanguageType) => {
-  console.log("changeLanguage", language);
+  if (i18n.language === language) {
+    return;
+  }
+
+  console.log("Changing language to:", language);
+
   await SecureStore.setItemAsync("language", language);
   i18n.changeLanguage(language);
-  //force rtl if language is arabic
-  I18nManager.forceRTL(language === "ar-AR");
+
+  const isRTL = language === "ar-AR";
+  I18nManager.forceRTL(isRTL);
 };
+
 export { i18n, changeLanguage, LanguageType };
