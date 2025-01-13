@@ -25,11 +25,9 @@
     "extra": {
       "supportsRTL": true
     },
-
     "plugins": [
       "expo-localization",
       "expo-router",
-
       [
         "expo-splash-screen",
         {
@@ -41,7 +39,8 @@
           },
           "imageWidth": 200
         }
-      ]
+      ],
+      "expo-secure-store"
     ],
     "experiments": {
       "typedRoutes": true
