@@ -19,8 +19,8 @@ export default function ProtectedLayout() {
     const prepareApp = async () => {
       SystemUI.setBackgroundColorAsync(theme.colors.background);
       if (!isLoading && !loadingTheme) {
-        await SplashScreen.hideAsync();
         setIsAppReady(true);
+        await SplashScreen.hideAsync();
       }
     };
 

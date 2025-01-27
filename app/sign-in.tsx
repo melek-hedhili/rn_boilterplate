@@ -4,24 +4,8 @@ import { useTheme } from "@/context/ThemeContext";
 import { useTranslation } from "@/hooks/useTranslation";
 import { changeLanguage, LanguageType } from "@/i18n";
 import { router } from "expo-router";
-import {
-  Controller,
-  Form,
-  FormProvider,
-  SubmitHandler,
-  useForm,
-  useFormContext,
-} from "react-hook-form";
-import {
-  Text,
-  TouchableOpacity,
-  View,
-  Image,
-  Button,
-  StyleSheet,
-  TextInput,
-  TextInputProps,
-} from "react-native";
+import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
+import { Text, TouchableOpacity, View, Image, Button } from "react-native";
 import { I18nManager } from "react-native";
 interface FormValues {
   firstName: string;
@@ -37,9 +21,9 @@ export default function SignIn() {
       lastName: "",
     },
   });
-  const onSubmit: SubmitHandler<FormValues> = (data) => {
+  const onSubmit: SubmitHandler<FormValues> = async (data) => {
     console.log(data);
-    signIn();
+    await signIn();
 
     router.replace("/(protected)/(tabs)/settings");
   };

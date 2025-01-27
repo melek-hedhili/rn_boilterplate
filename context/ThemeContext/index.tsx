@@ -31,11 +31,12 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
   useEffect(() => {
     const initializeAppearance = async () => {
       try {
-        setState((prevState) => ({
-          ...prevState,
-          appearance: (appearance as AppearanceProps | undefined) || scheme,
-          loadingTheme: false,
-        }));
+        if (!isLoading)
+          setState((prevState) => ({
+            ...prevState,
+            appearance: (appearance as AppearanceProps | undefined) || scheme,
+            loadingTheme: false,
+          }));
       } catch (error) {
         console.error("Error initializing appearance", error);
         setState((prevState) => ({
