@@ -13,7 +13,6 @@ export default function TabLayout() {
         headerTitleStyle: {
           color: theme.appBarTop().text,
         },
-
         headerStyle: {
           backgroundColor: theme.appBarTop().header,
         },
@@ -34,6 +33,7 @@ export default function TabLayout() {
         name="index"
         options={{
           title: "Home",
+          headerShown: false,
           tabBarIcon: ({ color }) => (
             <FontAwesome size={28} name="home" color={color} />
           ),

@@ -1,15 +1,17 @@
-import { Redirect, Slot } from "expo-router";
+import { Redirect, Stack } from "expo-router";
 import { useSession } from "@/context/AuthContext";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect, useState } from "react";
 import { useTheme } from "@/context/ThemeContext";
 import * as SystemUI from "expo-system-ui";
+import { ActivityIndicator, View } from "react-native";
 
 SplashScreen.preventAutoHideAsync();
 SplashScreen.setOptions({
   duration: 1000,
   fade: true,
 });
+
 export default function ProtectedLayout() {
   const { session, isLoading } = useSession();
   const [isAppReady, setIsAppReady] = useState(false);
@@ -29,13 +31,21 @@ export default function ProtectedLayout() {
 
   // While the app is not ready, keep the splash screen active
   if (!isAppReady) {
-    return null;
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <ActivityIndicator size="large" color={theme.colors.primary} />
+      </View>
+    );
   }
 
-  // Redirect unauthenticated users to the sign-in page
   if (!session) {
     return <Redirect href="/sign-in" />;
   }
 
-  return <Slot />;
+  return (
+    <Stack>
+      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+      <Stack.Screen name="home/[id]" options={{ headerShown: true }} />
+    </Stack>
+  );
 }

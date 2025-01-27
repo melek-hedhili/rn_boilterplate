@@ -31,12 +31,11 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
   useEffect(() => {
     const initializeAppearance = async () => {
       try {
-        if (!isLoading)
-          setState((prevState) => ({
-            ...prevState,
-            appearance: (appearance as AppearanceProps | undefined) || scheme,
-            loadingTheme: false,
-          }));
+        setState((prevState) => ({
+          ...prevState,
+          appearance: (appearance as AppearanceProps | undefined) || scheme,
+          loadingTheme: false,
+        }));
       } catch (error) {
         console.error("Error initializing appearance", error);
         setState((prevState) => ({
@@ -48,22 +47,25 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
     };
 
     initializeAppearance();
-  }, [scheme, appearance]);
+  }, [scheme, appearance, isLoading]);
 
   // Update theme based on current appearance
   useEffect(() => {
-    if (state.appearance === "dark" && darkTheme) {
-      setState((prevState) => ({
-        ...prevState,
-        theme: generateTheme(darkTheme),
-      }));
-    } else if (defaultTheme) {
-      setState((prevState) => ({
-        ...prevState,
-        theme: generateTheme(defaultTheme),
-      }));
+    if (!isLoading) {
+      const resolvedAppearance =
+        (appearance as AppearanceProps | undefined) || scheme;
+      const resolvedTheme =
+        resolvedAppearance === "dark" && darkTheme
+          ? generateTheme(darkTheme)
+          : generateTheme(defaultTheme || DefaultTheme);
+
+      setState({
+        theme: resolvedTheme,
+        appearance: resolvedAppearance,
+        loadingTheme: false, // Finish loading after state sync
+      });
     }
-  }, [darkTheme, defaultTheme, state.appearance]);
+  }, [isLoading, appearance, scheme, darkTheme, defaultTheme]);
 
   // Function to toggle between light and dark themes
   const switchTheme = useCallback(async () => {

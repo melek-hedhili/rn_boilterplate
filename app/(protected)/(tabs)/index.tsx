@@ -1,5 +1,5 @@
-import { useSession } from "@/context/AuthContext";
 import { useTheme } from "@/context/ThemeContext";
+import { Link } from "expo-router";
 import { Text, View } from "react-native";
 
 export default function Page() {
@@ -13,7 +13,9 @@ export default function Page() {
         backgroundColor: theme.colors.background,
       }}
     >
-      <Text>Home</Text>
+      <Link href="/home/1">
+        <Text>Home</Text>
+      </Link>
     </View>
   );
 }
